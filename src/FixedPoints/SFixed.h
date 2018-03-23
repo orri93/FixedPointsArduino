@@ -17,6 +17,8 @@
 #include "Details.h"
 #include "SFixedBase.h"
 
+#include "UFixed.h"
+
 FIXED_POINTS_BEGIN_NAMESPACE
 
 //
@@ -66,6 +68,7 @@ public:
 	constexpr SFixed(void);
 	constexpr SFixed(const IntegerType & integer);
 	constexpr SFixed(const IntegerType & integer, const FractionType & fraction);
+	explicit constexpr SFixed(const UFixed<Integer + 1, Fraction> & fixed);
 
 	constexpr InternalType getInternal(void) const;
 	constexpr IntegerType getInteger(void) const;
@@ -74,6 +77,7 @@ public:
 	constexpr explicit operator IntegerType(void) const;
 	constexpr explicit operator float(void) const;
 	constexpr explicit operator double(void) const;
+	constexpr explicit operator UFixed<Integer + 1, Fraction>(void) const;
 
 	template< unsigned IntegerOut, unsigned FractionOut >
 	constexpr explicit operator SFixed<IntegerOut, FractionOut>(void) const;

@@ -36,6 +36,12 @@ constexpr SFixed<Integer, Fraction>::SFixed(const IntegerType & integer, const F
 {
 }
 
+template< unsigned Integer, unsigned Fraction >
+constexpr SFixed<Integer, Fraction>::SFixed(const UFixed<Integer + 1, Fraction> & fixed)
+	: Base(RawType(static_cast<InternalType>(fixed.getInternal())))
+{
+}
+
 //
 // Getters
 //
@@ -84,6 +90,14 @@ constexpr SFixed<Integer, Fraction>::operator double(void) const
 	static_cast<InternalType>
 	((this->value & IdentityMask) |
 	((this->value < 0) ? ~IdentityMask : 0));
+}
+
+template< unsigned Integer, unsigned Fraction >
+constexpr SFixed<Integer, Fraction>::operator UFixed<Integer + 1, Fraction>(void) const
+{
+	using ResultType = UFixed<Integer + 1, Fraction>;
+	using InternalType = typename ResultType::InternalType;
+	return ResultType::fromInternal(static_cast<InternalType>(this->value));
 }
 
 template< unsigned Integer, unsigned Fraction >
