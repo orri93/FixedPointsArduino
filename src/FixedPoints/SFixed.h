@@ -114,6 +114,7 @@ public:
 	SFixed & operator /=(const SFixed & other);
 	
 public:
+#if !defined(FIXED_POINTS_NO_CONSTANTS)
 	constexpr const static SFixed Epsilon = SFixed::fromInternal(1);
 	constexpr const static SFixed MinValue = SFixed::fromInternal(FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
 	constexpr const static SFixed MaxValue = SFixed::fromInternal(~FIXED_POINTS_DETAILS::MsbMask<InternalSize>::Value);
@@ -123,6 +124,7 @@ public:
 	constexpr const static SFixed E = 2.718281828459045235360287471352662497757;
 	constexpr const static SFixed Phi = 1.6180339887498948482045868343656381177203;
 	constexpr const static SFixed Tau = 6.2831853071795864769252867665590057683943;
+#endif
 };
 
 
